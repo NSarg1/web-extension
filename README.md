@@ -7,7 +7,7 @@ How beautiful is create-react-app, just type it, and you will get pre-structured
 Just type the following in your console and press enter.
 
 ```sh
-npx create-react-app my-chrome-extension --scripts-version chrome-extension-react-scripts --template extension-typescript
+npx create-react-app my-chrome-extension --scripts-version web-extension --template web-extension-typescript
 ```
 
 
