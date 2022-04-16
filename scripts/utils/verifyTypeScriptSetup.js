@@ -290,7 +290,7 @@ function verifyTypeScriptSetup() {
   if (!fs.existsSync(paths.appTypeDeclarations)) {
     fs.writeFileSync(
       paths.appTypeDeclarations,
-      `/// <reference types="ns-extension-react-scripts" />${os.EOL}`
+      `/// <reference types="web-extension" />${os.EOL}`
     );
   }
 }
