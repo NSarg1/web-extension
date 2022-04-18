@@ -59,6 +59,7 @@ if (
 ) {
   process.exit(1);
 }
+fs.rmSync(paths.devAppBuild, { recursive: true, force: true });
 
 // Tools like Cloud9 rely on this.
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;

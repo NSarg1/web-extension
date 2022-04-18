@@ -1,6 +1,6 @@
 {
   "name": "web-extension",
-  "version": "1.0.9",
+  "version": "1.0.12",
   "description": "Create-react-app scripts for web extension",
   "keywords": [
     "react",
@@ -37,6 +37,7 @@
   "types": "./lib/react-app.d.ts",
   "dependencies": {
     "@babel/core": "^7.16.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@svgr/webpack": "^5.5.0",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.3",
@@ -69,6 +70,7 @@
     "prompts": "^2.4.2",
     "react-app-polyfill": "^3.0.0",
     "react-dev-utils": "^12.0.1",
+    "react-refresh": "^0.11.0",
     "resolve": "^1.20.0",
     "resolve-url-loader": "^4.0.0",
     "sass-loader": "^12.3.0",
