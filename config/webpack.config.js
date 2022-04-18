@@ -99,6 +99,8 @@ module.exports = function (webpackEnv) {
 
   const env = getClientEnvironment();
 
+  const shouldUseReactRefresh = env.raw.FAST_REFRESH;
+
   // common function to get style loaders
   const getStyleLoaders = (cssOptions, preProcessor) => {
     const loaders = [
