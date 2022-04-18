@@ -6,21 +6,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 // @remove-on-eject-end
-'use strict';
+"use strict";
 
-const evalSourceMapMiddleware = require('react-dev-utils/evalSourceMapMiddleware');
-const errorOverlayMiddleware = require('react-dev-utils/errorOverlayMiddleware');
-const ignoredFiles = require('react-dev-utils/ignoredFiles');
-const paths = require('./paths');
+const evalSourceMapMiddleware = require("react-dev-utils/evalSourceMapMiddleware");
+const errorOverlayMiddleware = require("react-dev-utils/errorOverlayMiddleware");
+const ignoredFiles = require("react-dev-utils/ignoredFiles");
+const paths = require("./paths");
 
-const host = process.env.HOST || '0.0.0.0';
+const host = process.env.HOST || "0.0.0.0";
 const sockHost = process.env.WDS_SOCKET_HOST;
 const sockPath = process.env.WDS_SOCKET_PATH; // default: '/ws'
 const sockPort = process.env.WDS_SOCKET_PORT;
-
-
-
-
 
 module.exports = function () {
   return {
@@ -42,15 +38,15 @@ module.exports = function () {
     // really know what you're doing with a special environment variable.
     // Note: ["localhost", ".localhost"] will support subdomains - but we might
     // want to allow setting the allowedHosts manually for more complex setups
-    allowedHosts: 'all',
+    allowedHosts: "all",
     headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': '*',
-      'Access-Control-Allow-Headers': '*',
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "*",
+      "Access-Control-Allow-Headers": "*",
     },
     // Enable gzip compression of generated files.
     compress: true,
-   
+
     static: {
       // By default WebpackDevServer serves physical files from current directory
       // in addition to all the virtual build products that it serves from memory.
@@ -73,7 +69,7 @@ module.exports = function () {
     },
     hot: true,
     client: false,
-    webSocketServer: 'ws',
+    webSocketServer: "ws",
     // Prevent a WS client from getting injected as we're already including
     // `webpackHotDevClient`.
     devMiddleware: {
@@ -92,17 +88,9 @@ module.exports = function () {
       // See https://github.com/facebook/create-react-app/issues/387.
       disableDotRule: true,
     },
-    onBeforeSetupMiddleware(devServer) {
-      // Keep `evalSourceMapMiddleware`
-      // middlewares before `redirectServedPath` otherwise will not have any effect
-      // This lets us fetch source contents from webpack for the error overlay
+    setupMiddlewares: (middlewares, devServer) => {
       devServer.app.use(evalSourceMapMiddleware(devServer));
-
-      if (fs.existsSync(paths.proxySetup)) {
-        // This registers user provided middleware for proxy reasons
-        require(paths.proxySetup)(devServer.app);
-      }
+      return middlewares;
     },
- 
   };
 };
