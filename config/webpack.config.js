@@ -13,7 +13,6 @@ const path = require("path");
 const webpack = require("webpack");
 const resolve = require("resolve");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const WriteFilePlugin = require("write-file-webpack-plugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -743,9 +742,6 @@ module.exports = function (webpackEnv) {
             },
           },
         }),
-      // Forces webpack dev server to write to the file system so we can serve it for hot reloading
-      // the extension. This plugin is only in effect with "webpack-dev-server", otherwise it lets webpack do the writing
-      new WriteFilePlugin(),
     ].filter(Boolean),
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
