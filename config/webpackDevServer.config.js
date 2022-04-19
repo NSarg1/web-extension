@@ -68,9 +68,7 @@ module.exports = function () {
       watch: true,
     },
     hot: true,
-    client: {
-      logging: 'info'
-    },
+    client: false,
     webSocketServer: "ws",
     // Prevent a WS client from getting injected as we're already including
     // `webpackHotDevClient`.
