@@ -27,6 +27,7 @@ const paths = require("./paths");
 const modules = require("./modules");
 const getClientEnvironment = require("./env");
 const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin");
+const ExtReloader  = require('webpack-ext-reloader');
 const ForkTsCheckerWebpackPlugin =
   process.env.TSC_COMPILE_ON_ERROR === "true"
     ? require("react-dev-utils/ForkTsCheckerWarningWebpackPlugin")
@@ -742,6 +743,7 @@ module.exports = function (webpackEnv) {
             },
           },
         }),
+      // isEnvDevelopment && new ExtReloader(),
     ].filter(Boolean),
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
