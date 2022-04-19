@@ -27,7 +27,6 @@ const paths = require("./paths");
 const modules = require("./modules");
 const getClientEnvironment = require("./env");
 const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin");
-const ExtReloader  = require('webpack-ext-reloader');
 const ForkTsCheckerWebpackPlugin =
   process.env.TSC_COMPILE_ON_ERROR === "true"
     ? require("react-dev-utils/ForkTsCheckerWarningWebpackPlugin")
