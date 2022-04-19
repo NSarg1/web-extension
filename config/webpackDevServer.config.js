@@ -9,14 +9,9 @@
 "use strict";
 
 const evalSourceMapMiddleware = require("react-dev-utils/evalSourceMapMiddleware");
-const errorOverlayMiddleware = require("react-dev-utils/errorOverlayMiddleware");
 const ignoredFiles = require("react-dev-utils/ignoredFiles");
 const paths = require("./paths");
-
 const host = process.env.HOST || "0.0.0.0";
-const sockHost = process.env.WDS_SOCKET_HOST;
-const sockPath = process.env.WDS_SOCKET_PATH; // default: '/ws'
-const sockPort = process.env.WDS_SOCKET_PORT;
 
 module.exports = function () {
   return {
@@ -62,25 +57,27 @@ module.exports = function () {
       // for files like `favicon.ico`, `manifest.json`, and libraries that are
       // for some reason broken when imported through webpack. If you just want to
       // use an image, put it in `src` and `import` it from JavaScript instead.
-      directory: paths.devAppBuild,
-      publicPath: [paths.appPublic],
+      directory: paths.appPublic,
+      publicPath: [""],
       // By default files from `contentBase` will not trigger a page reload.
-      watch: true,
+      watch: {
+        // Reportedly, this avoids CPU overload on some systems.
+        // https://github.com/facebook/create-react-app/issues/293
+        // src/node_modules is not ignored to support absolute imports
+        // https://github.com/facebook/create-react-app/issues/1065
+        ignored: ignoredFiles(paths.appSrc),
+      },
     },
     hot: true,
     client: false,
-    webSocketServer: "ws",
-    // Prevent a WS client from getting injected as we're already including
-    // `webpackHotDevClient`.
     devMiddleware: {
       // It is important to tell WebpackDevServer to use the same "publicPath" path as
       // we specified in the webpack config. When homepage is '.', default to serving
       // from the root.
       // remove last slash so user can land on `/test` instead of `/test/`
-      publicPath: paths.devAppBuild,
-      writeToDisk: true,
+      publicPath: "",
+      writeToDisk: true
     },
-
     https: false,
     host,
     historyApiFallback: {
